@@ -1,6 +1,5 @@
 package com.example.mycostsapp.activities
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mycostsapp.R
@@ -12,10 +11,15 @@ import com.github.mikephil.charting.data.BarEntry
 
 private lateinit var binding: ActivityHomepageBinding
 
-private lateinit var barChart: BarChart
-private lateinit var barData: BarData
-private lateinit var barDataSet: BarDataSet
-private lateinit var barEntriesList: ArrayList<BarEntry>
+private lateinit var barChartSpent: BarChart
+private lateinit var barEntriesListSpent: ArrayList<BarEntry>
+private lateinit var barDataSetSpent: BarDataSet
+private lateinit var barDataSpent: BarData
+
+private lateinit var barChartSaved: BarChart
+private lateinit var barEntriesListSaved: ArrayList<BarEntry>
+private lateinit var barDataSetSaved: BarDataSet
+private lateinit var barDataSaved: BarData
 
 class HomepageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,25 +33,120 @@ class HomepageActivity : AppCompatActivity() {
             supportActionBar?.title = "Home"
         }
 
-        barChart = binding.bcLastThreeMonthsBarChart
+        setSpentBarChart()
+        setSavedBarChart()
+    }
 
-        barEntriesList = ArrayList()
+    // Set bar chart for spent money in last three months
+    private fun setSpentBarChart(){
+
+        // Connect barChart variable to bar chart in xml layout
+        barChartSpent = binding.bcSpentLastThreeMonthsBarChart
+
+        // Set data list which will be shown in the bar chart
+        barEntriesListSpent = ArrayList()
+
+        // Get three values to be shown in the bar chart
+        val monthThreeValue = binding.tvSpentMonthThreeValue.text.toString().toFloat()
+        val monthTwoValue = binding.tvSpentMonthTwoValue.text.toString().toFloat()
+        val monthOneValue = binding.tvSpentMonthOneValue.text.toString().toFloat()
 
         // on below line we are adding data
         // to our bar entries list
-        barEntriesList.add(BarEntry(1f, 1f))
-        barEntriesList.add(BarEntry(2f, 2f))
-        barEntriesList.add(BarEntry(3f, 3f))
-        barEntriesList.add(BarEntry(4f, 4f))
-        barEntriesList.add(BarEntry(5f, 5f))
+        barEntriesListSpent.add(BarEntry(1f, monthThreeValue))
+        barEntriesListSpent.add(BarEntry(2f, monthTwoValue))
+        barEntriesListSpent.add(BarEntry(3f, monthOneValue))
 
-        barDataSet = BarDataSet(barEntriesList, "Bar Chart Data")
-        barData = BarData(barDataSet)
-        barDataSet.valueTextColor = Color.BLACK
-        barDataSet.setColor(R.color.purple_200)
-        barDataSet.valueTextSize = 16f
-        barChart.description.isEnabled = false
+        //Set colors list for bar chart data
+        val colorsArray = IntArray(3)
 
-        //TODO Vidi hoćeš li uopće stavljati bar chart. Ako nećeš, izbriši dependency i repository
+        colorsArray[0] = R.color.base_green
+        colorsArray[1] = R.color.app_yellow
+        colorsArray[2] = R.color.app_blue
+
+        // Initializing bar data set
+        barDataSetSpent = BarDataSet(barEntriesListSpent, "")
+
+        //Initializing bar data
+        barDataSpent = BarData(barDataSetSpent)
+
+        // Set colors of data bars
+        barDataSetSpent.setColors(colorsArray, this)
+
+        // Remove text from bars
+        barDataSetSpent.valueTextSize = 0f
+
+        // Setting data to the bar chart
+        barChartSpent.data = barDataSpent
+
+        // Remove text from x axis
+        barChartSpent.xAxis.textColor = 0
+
+        // Remove text from left and right y axis
+        barChartSpent.axisLeft.textColor = 0
+        barChartSpent.axisRight.textColor = 0
+
+        // Disable bar chart description text
+        barChartSpent.description.isEnabled = false
+
+        // Disable any event if bar chart is touched
+        barChartSpent.setTouchEnabled(false)
+
+    }
+
+    // Set bar chart for saved money in last three months
+    private fun setSavedBarChart(){
+
+        // Connect barChart variable to bar chart in xml layout
+        barChartSaved = binding.bcSavedLastThreeMonthsBarChart
+
+        // Set data list which will be shown in the bar chart
+        barEntriesListSaved = ArrayList()
+
+        // Get three values to be shown in the bar chart
+        val monthThreeValue = binding.tvSavedMonthThreeValue.text.toString().toFloat()
+        val monthTwoValue = binding.tvSavedMonthTwoValue.text.toString().toFloat()
+        val monthOneValue = binding.tvSavedMonthOneValue.text.toString().toFloat()
+
+        // on below line we are adding data
+        // to our bar entries list
+        barEntriesListSaved.add(BarEntry(1f, monthThreeValue))
+        barEntriesListSaved.add(BarEntry(2f, monthTwoValue))
+        barEntriesListSaved.add(BarEntry(3f, monthOneValue))
+
+        //Set colors list for bar chart data
+        val colorsArray = IntArray(3)
+
+        colorsArray[0] = R.color.base_green
+        colorsArray[1] = R.color.app_yellow
+        colorsArray[2] = R.color.app_blue
+
+        // Initializing bar data set
+        barDataSetSaved = BarDataSet(barEntriesListSaved, "")
+
+        //Initializing bar data
+        barDataSaved = BarData(barDataSetSaved)
+
+        // Set colors of data bars
+        barDataSetSaved.setColors(colorsArray, this)
+
+        // Remove text from bars
+        barDataSetSaved.valueTextSize = 0f
+
+        // Setting data to the bar chart
+        barChartSaved.data = barDataSaved
+
+        // Remove text from x axis
+        barChartSaved.xAxis.textColor = 0
+
+        // Remove text from left and right y axis
+        barChartSaved.axisLeft.textColor = 0
+        barChartSaved.axisRight.textColor = 0
+
+        // Disable bar chart description text
+        barChartSaved.description.isEnabled = false
+
+        // Disable any event if bar chart is touched
+        barChartSaved.setTouchEnabled(false)
     }
 }

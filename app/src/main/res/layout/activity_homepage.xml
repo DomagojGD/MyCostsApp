@@ -16,13 +16,29 @@
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddNewExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add New Expense"
+        android:textColor="@color/base_green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@drawable/btn_white_ripple_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarHomepage"
+        android:layout_margin="10dp"
+        android:elevation="10dp"/>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCurrentMonthSpendingInfo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarHomepage"
+        app:layout_constraintTop_toBottomOf="@id/btnAddNewExpense"
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
         android:layout_margin="10dp"
@@ -219,7 +235,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvLastThreeMonthsInfo"
+        android:id="@+id/cvSpentLastThreeMonthsInfo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -237,23 +253,23 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvLastThreeMonths"
+                android:id="@+id/tvSpentLastThreeMonths"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="Last Three Months"
+                android:layout_margin="10dp"
+                android:text="Spent In Last Three Months"
                 android:textColor="@color/base_green"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="10dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/MonthThree"
+                android:id="@+id/tvSpentMonthThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/MonthTwo"
+                app:layout_constraintBottom_toTopOf="@id/tvSpentMonthTwo"
                 android:layout_margin="10dp"
                 android:text="Month Three:"
                 android:textSize="16sp"
@@ -261,23 +277,23 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/MonthThreeValue"
+                android:id="@+id/tvSpentMonthThreeValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/MonthThree"
-                app:layout_constraintBottom_toTopOf="@id/MonthTwo"
+                app:layout_constraintStart_toEndOf="@id/tvSpentMonthThree"
+                app:layout_constraintBottom_toTopOf="@id/tvSpentMonthTwo"
                 android:layout_margin="10dp"
-                android:text="100"
+                android:text="2148"
                 android:textColor="@color/base_green"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/MonthTwo"
+                android:id="@+id/tvSpentMonthTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLastThreeMonths"
+                app:layout_constraintTop_toBottomOf="@id/tvSpentLastThreeMonths"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_margin="10dp"
                 android:text="Month Two:"
@@ -286,23 +302,23 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/MonthTwoValue"
+                android:id="@+id/tvSpentMonthTwoValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/MonthThreeValue"
-                app:layout_constraintTop_toBottomOf="@id/MonthThree"
+                app:layout_constraintStart_toStartOf="@id/tvSpentMonthThreeValue"
+                app:layout_constraintTop_toBottomOf="@id/tvSpentMonthThree"
                 android:layout_marginTop="10dp"
-                android:text="100"
+                android:text="1950"
                 android:textColor="@color/app_yellow"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/MonthOne"
+                android:id="@+id/tvSpentMonthOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/MonthTwo"
+                app:layout_constraintTop_toBottomOf="@id/tvSpentMonthTwo"
                 android:layout_margin="10dp"
                 android:text="Month One:"
                 android:textSize="16sp"
@@ -310,24 +326,141 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/MonthOneValue"
+                android:id="@+id/tvSpentMonthOneValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/MonthThreeValue"
-                app:layout_constraintTop_toBottomOf="@id/MonthTwo"
+                app:layout_constraintStart_toStartOf="@id/tvSpentMonthThreeValue"
+                app:layout_constraintTop_toBottomOf="@id/tvSpentMonthTwo"
                 android:layout_marginTop="10dp"
-                android:text="100"
+                android:text="1000"
                 android:textColor="@color/app_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/bcLastThreeMonthsBarChart"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                app:layout_constraintStart_toEndOf="@id/MonthThreeValue"
+                android:id="@+id/bcSpentLastThreeMonthsBarChart"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toEndOf="@id/tvSpentMonthThreeValue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/MonthThree"/>
+                app:layout_constraintTop_toTopOf="@id/tvSpentLastThreeMonths"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvSavedLastThreeMonthsInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvSpentLastThreeMonthsInfo"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvSavedLastThreeMonths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Saved In Last Three Months"
+                android:textColor="@color/base_green"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSavedMonthThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvSavedMonthTwo"
+                android:layout_margin="10dp"
+                android:text="Month Three:"
+                android:textSize="16sp"
+                android:textColor="@color/base_green"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSavedMonthThreeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/tvSavedMonthThree"
+                app:layout_constraintBottom_toTopOf="@id/tvSavedMonthTwo"
+                android:layout_margin="10dp"
+                android:text="2148"
+                android:textColor="@color/base_green"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSavedMonthTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedLastThreeMonths"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="10dp"
+                android:text="Month Two:"
+                android:textSize="16sp"
+                android:textColor="@color/app_yellow"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSavedMonthTwoValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvSavedMonthThreeValue"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedMonthThree"
+                android:layout_marginTop="10dp"
+                android:text="1950"
+                android:textColor="@color/app_yellow"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSavedMonthOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedMonthTwo"
+                android:layout_margin="10dp"
+                android:text="Month One:"
+                android:textSize="16sp"
+                android:textColor="@color/app_blue"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvSavedMonthOneValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvSavedMonthThreeValue"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedMonthTwo"
+                android:layout_marginTop="10dp"
+                android:text="1000"
+                android:textColor="@color/app_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bcSavedLastThreeMonthsBarChart"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                app:layout_constraintStart_toEndOf="@id/tvSavedMonthThreeValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvSavedLastThreeMonths"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
