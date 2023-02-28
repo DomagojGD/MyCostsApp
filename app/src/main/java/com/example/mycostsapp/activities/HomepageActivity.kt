@@ -1,5 +1,6 @@
 package com.example.mycostsapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mycostsapp.R
@@ -35,6 +36,11 @@ class HomepageActivity : AppCompatActivity() {
 
         setSpentBarChart()
         setSavedBarChart()
+
+        binding.btnAddNewExpense.setOnClickListener {
+            val intent = Intent(this, AddNewCostActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Set bar chart for spent money in last three months

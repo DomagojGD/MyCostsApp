@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddNewCostActivity"
+    android:background="@color/dirty_white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAddNewCost"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:theme="@style/ToolbarTheme"
+        android:background="@color/base_green"
+        app:titleTextColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvSelectCostCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select cost category:"
+        android:textStyle="bold"
+        android:textColor="@color/base_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarAddNewCost"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/llCostCategoriesButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectCostCategory"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGroceries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Groceries"
+            android:textSize="16sp"
+            android:textColor="@color/base_green"
+            android:background="@drawable/btn_white_background"
+            android:layout_margin="5dp"
+            android:layout_weight="0.25"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car"
+            android:textSize="16sp"
+            android:textColor="@color/base_green"
+            android:background="@drawable/btn_white_background"
+            android:layout_margin="5dp"
+            android:layout_weight="0.25"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bills"
+            android:textSize="16sp"
+            android:textColor="@color/base_green"
+            android:background="@drawable/btn_white_background"
+            android:layout_margin="5dp"
+            android:layout_weight="0.25"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textSize="16sp"
+            android:textColor="@color/base_green"
+            android:background="@drawable/btn_white_background"
+            android:layout_margin="5dp"
+            android:layout_weight="0.25"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvEnterCostDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Cost Date:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llCostCategoriesButtons"
+        android:layout_margin="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEnterCostDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/base_green"
+        android:hint="Enter cost date"
+        android:textColorHint="@color/light_green"
+        android:textColorLink="@color/base_green"
+        android:textColorHighlight="@color/light_green"
+        android:textCursorDrawable="@color/base_green"
+        android:backgroundTint="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEnterCostDate"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/tvEnterCostDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Cost Description:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEnterCostDate"
+        android:layout_margin="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEnterCostDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/base_green"
+        android:hint="Enter cost description"
+        android:textColorHint="@color/light_green"
+        android:textColorLink="@color/base_green"
+        android:textColorHighlight="@color/light_green"
+        android:textCursorDrawable="@color/base_green"
+        android:backgroundTint="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEnterCostDescription"
+        android:layout_margin="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddNewCostFinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Finish"
+        android:textStyle="bold"
+        android:textColor="@color/base_green"
+        android:textSize="16sp"
+        android:background="@drawable/btn_white_ripple_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="10dp"
+        android:layout_margin="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
