@@ -20,7 +20,7 @@
         android:id="@+id/tvSelectCostCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select cost category:"
+        android:text="Select Cost Category:"
         android:textStyle="bold"
         android:textColor="@color/base_green"
         android:textSize="20sp"
@@ -111,7 +111,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEnterCostDate"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/tvEnterCostDescription"
@@ -140,6 +142,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEnterCostDescription"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/tvEnterCostAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Cost Amount:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEnterCostDescription"
+        android:layout_margin="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEnterCostAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/base_green"
+        android:hint="Enter cost Amount"
+        android:textColorHint="@color/light_green"
+        android:textColorLink="@color/base_green"
+        android:textColorHighlight="@color/light_green"
+        android:textCursorDrawable="@color/base_green"
+        android:backgroundTint="@color/base_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEnterCostAmount"
         android:layout_margin="10dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
