@@ -49,4 +49,7 @@ dependencies {
 
     //Third party library for bar chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //Repository added to settings.gradle under 'repositories'
+
+    //Volley library for network request
+    implementation 'com.android.volley:volley:1.2.1'
 }
