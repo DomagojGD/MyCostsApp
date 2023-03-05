@@ -2,8 +2,12 @@ package com.example.mycostsapp.activities
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.mycostsapp.R
 import com.example.mycostsapp.databinding.ActivityAddNewCostBinding
 import java.text.SimpleDateFormat
@@ -15,6 +19,9 @@ private lateinit var binding: ActivityAddNewCostBinding
 private var calendar = Calendar.getInstance()
 //Set date listener variable
 private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+
+//a number to know which category was selected
+private var costCategoryNumber = 0
 
 class AddNewCostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +53,9 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+
+            //Category one selected
+            costCategoryNumber = 1
         }
 
         //When 'car' button is clicked, its color turns green and the rest white.
@@ -60,6 +70,9 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.white))
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+
+            //Category two selected
+            costCategoryNumber = 2
         }
 
         //When 'bills' button is clicked, its color turns green and the rest white.
@@ -74,6 +87,9 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.white))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+
+            //Category three selected
+            costCategoryNumber = 3
         }
 
         //When 'other' button is clicked, its color turns green and the rest white.
@@ -88,6 +104,9 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+            //Category four selected
+            costCategoryNumber = 4
         }
 
         //Show date picker dialog when 'etEnterCostDate' is clicked.
@@ -111,5 +130,44 @@ class AddNewCostActivity : AppCompatActivity() {
 
             DatePickerDialog(this@AddNewCostActivity, dateSetListener, year, month, dayOfMonth).show()
         }
+
+        binding.btnAddNewCostFinish.setOnClickListener {
+            sendDataToGoogleSheet()
+        }
+    }
+
+    private fun sendDataToGoogleSheet(){
+
+        if(costCategoryNumber == 0 || binding.etEnterCostDate.text!!.isEmpty() ||
+            binding.etEnterCostDescription.text!!.isEmpty() || binding.etEnterCostAmount.text!!.isEmpty()){
+
+            //All data has to be entered
+            Toast.makeText(this@AddNewCostActivity, "Please enter all data!", Toast.LENGTH_LONG).show()
+        }else{
+            val url = "https://script.google.com/macros/s/AKfycbwc0WvIcs_wzm53NKVZWH5Zys2-JwA6JOdZB7FlFm-J5I2UcugJcUi_UY9XY3lBbCXANA/exec"
+            val stringRequest = object: StringRequest(Method.POST, url,
+                Response.Listener {
+                    Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
+                },
+                Response.ErrorListener {
+                    Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
+                }){
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+
+                    params["category"] = costCategoryNumber.toString()
+                    params["date"] = binding.etEnterCostDate.text.toString()
+                    params["description"] = binding.etEnterCostDescription.text.toString()
+                    params["amount"] = binding.etEnterCostAmount.text.toString()
+
+                    return params
+                }
+            }
+
+            val queue = Volley.newRequestQueue(this@AddNewCostActivity)
+            queue.add(stringRequest)
+        }
     }
 }
+
+//TODO dodaj opis i ovdje i u app scriptu

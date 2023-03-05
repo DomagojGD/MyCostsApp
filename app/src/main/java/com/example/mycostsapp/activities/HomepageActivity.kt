@@ -169,7 +169,7 @@ class HomepageActivity : AppCompatActivity() {
         val monthlyExpensesList = ArrayList<MonthlyExpenses>()
 
         val queue = Volley.newRequestQueue(this)
-        val url = "https://script.google.com/macros/s/AKfycbygPofLP9GS4QdYqMWi0tf9fInLtNvAjyPias3QxxBtPQ3U00pQ4uzutMgP3EW2xMSm8A/exec"
+        val url = "https://script.google.com/macros/s/AKfycbwc0WvIcs_wzm53NKVZWH5Zys2-JwA6JOdZB7FlFm-J5I2UcugJcUi_UY9XY3lBbCXANA/exec"
         val jsonObjectRequest = object: JsonObjectRequest(
             Method.GET, url, null, Response.Listener {
                 val data = it.getJSONArray("expenseValues")
@@ -262,6 +262,6 @@ class HomepageActivity : AppCompatActivity() {
 
     //TODO nauči kako se stavlja splash screen i onda će bar chart biti odmah prikazan
     //TODO dodaj opis funkcija i varijabli
-    //TODO Pogledaj šta se događa kad nema interneta i odluči što ćeš tada napraviti
+    //TODO Pogledaj šta se događa kad nema interneta i odluči što ćeš tada napraviti. Napravi offline activity.
     //TODO kad uđeš u AddNewCostActivity, homepage se ne reloada. Popravi.
 }
