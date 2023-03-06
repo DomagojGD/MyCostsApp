@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -194,7 +195,9 @@ class HomepageActivity : AppCompatActivity() {
                 binding.llPleaseWaitProgressBarHomepage.visibility = View.GONE
             },
             Response.ErrorListener {
-                Toast.makeText(this@HomepageActivity, it.toString(), Toast.LENGTH_LONG).show()
+                finish()
+                val intent = Intent(this, OfflineActivity::class.java)
+                startActivity(intent)
             }
         ){
             override fun getHeaders(): MutableMap<String, String> {
@@ -221,6 +224,10 @@ class HomepageActivity : AppCompatActivity() {
         binding.tvCurrentMonthOtherValue.text = other.toString()
         binding.tvCurrentMonthTotalSpentValue.text = totalExpenses.toString()
         binding.tvCurrentMonthSavingsValue.text = totalSavings.toString()
+
+        if(binding.tvCurrentMonthSavingsValue.text.toString().toDouble() < 0){
+            binding.tvCurrentMonthSavingsValue.setTextColor(ContextCompat.getColor(this, R.color.red))
+        }
     }
 
     private fun setLastThreeMonthsExpenses(monthlyExpensesList: ArrayList<MonthlyExpenses>){
@@ -241,6 +248,7 @@ class HomepageActivity : AppCompatActivity() {
         binding.tvSpentMonthOneValue.text = monthBeforeTheLast.toString()
 
         setSpentBarChart(currentMonth.toFloat(), lastMonth.toFloat(), monthBeforeTheLast.toFloat())
+        binding.bcSpentLastThreeMonthsBarChart.visibility = View.VISIBLE
     }
 
     private fun setLastThreeMonthsSavings(monthlyExpensesList: ArrayList<MonthlyExpenses>){
@@ -261,6 +269,7 @@ class HomepageActivity : AppCompatActivity() {
         binding.tvSavedMonthOneValue.text = monthBeforeTheLast.toString()
 
         setSavedBarChart(currentMonth.toFloat(), lastMonth.toFloat(), monthBeforeTheLast.toFloat())
+        binding.bcSavedLastThreeMonthsBarChart.visibility = View.VISIBLE
     }
 
     //TODO nauči kako se stavlja splash screen i onda će bar chart biti odmah prikazan

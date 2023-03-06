@@ -13,6 +13,7 @@
     <color name="light_green">#96DAA4</color>
     <color name="app_yellow">#FBBB05</color>
     <color name="app_blue">#4285F4</color>
+    <color name="red">#FF0000</color>
 
     <color name="purple_70">#FF3700B3</color>
 </resources>
