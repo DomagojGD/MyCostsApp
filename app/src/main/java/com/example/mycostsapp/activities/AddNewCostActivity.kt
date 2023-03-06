@@ -1,7 +1,9 @@
 package com.example.mycostsapp.activities
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -88,8 +90,8 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.white))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.base_green))
 
-            //Category three selected
-            costCategoryNumber = 3
+            //Category four selected
+            costCategoryNumber = 4
         }
 
         //When 'other' button is clicked, its color turns green and the rest white.
@@ -105,8 +107,8 @@ class AddNewCostActivity : AppCompatActivity() {
             binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.base_green))
             binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-            //Category four selected
-            costCategoryNumber = 4
+            //Category three selected
+            costCategoryNumber = 3
         }
 
         //Show date picker dialog when 'etEnterCostDate' is clicked.
@@ -132,6 +134,7 @@ class AddNewCostActivity : AppCompatActivity() {
         }
 
         binding.btnAddNewCostFinish.setOnClickListener {
+            binding.llPleaseWaitProgressBarAddNewCost.visibility = View.VISIBLE
             sendDataToGoogleSheet()
         }
     }
@@ -148,6 +151,8 @@ class AddNewCostActivity : AppCompatActivity() {
             val stringRequest = object: StringRequest(Method.POST, url,
                 Response.Listener {
                     Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
+                    binding.llPleaseWaitProgressBarAddNewCost.visibility = View.GONE
+                    clearNewCostsValues()
                 },
                 Response.ErrorListener {
                     Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
@@ -155,10 +160,14 @@ class AddNewCostActivity : AppCompatActivity() {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
 
+                    val costAmountText = binding.etEnterCostAmount.text.toString()
+                    val costAmountWithComa = costAmountText.replace(".", ",")
+
                     params["category"] = costCategoryNumber.toString()
                     params["date"] = binding.etEnterCostDate.text.toString()
                     params["description"] = binding.etEnterCostDescription.text.toString()
-                    params["amount"] = binding.etEnterCostAmount.text.toString()
+                    //params["amount"] = binding.etEnterCostAmount.text.toString()
+                    params["amount"] = costAmountWithComa
 
                     return params
                 }
@@ -167,6 +176,29 @@ class AddNewCostActivity : AppCompatActivity() {
             val queue = Volley.newRequestQueue(this@AddNewCostActivity)
             queue.add(stringRequest)
         }
+    }
+
+    private fun clearNewCostsValues(){
+        binding.btnGroceries.setBackgroundResource(R.drawable.btn_white_background)
+        binding.btnCar.setBackgroundResource(R.drawable.btn_white_background)
+        binding.btnBills.setBackgroundResource(R.drawable.btn_white_background)
+        binding.btnGroceries.setBackgroundResource(R.drawable.btn_white_background)
+
+        binding.btnGroceries.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+        binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+        binding.btnBills.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+        binding.btnOther.setTextColor(ContextCompat.getColor(this, R.color.base_green))
+
+        binding.etEnterCostDate.text!!.clear()
+        binding.etEnterCostDescription.text!!.clear()
+        binding.etEnterCostAmount.text!!.clear()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        val intent = Intent(this, HomepageActivity::class.java)
+        startActivity(intent)
     }
 }
 

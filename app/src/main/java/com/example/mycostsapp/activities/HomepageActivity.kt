@@ -3,6 +3,7 @@ package com.example.mycostsapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -40,12 +41,13 @@ class HomepageActivity : AppCompatActivity() {
             supportActionBar?.title = "Home"
         }
 
-        //setSpentBarChart()
-        //setSavedBarChart()
-
         getValuesFromGoogleSheet()
 
+        binding.btnAddNewExpense.isClickable =
+            binding.llPleaseWaitProgressBarHomepage.visibility != View.VISIBLE
+
         binding.btnAddNewExpense.setOnClickListener {
+            finish()
             val intent = Intent(this, AddNewCostActivity::class.java)
             startActivity(intent)
         }
@@ -189,6 +191,7 @@ class HomepageActivity : AppCompatActivity() {
                 setUpLastMonthExpenses(monthlyExpensesList)
                 setLastThreeMonthsExpenses(monthlyExpensesList)
                 setLastThreeMonthsSavings(monthlyExpensesList)
+                binding.llPleaseWaitProgressBarHomepage.visibility = View.GONE
             },
             Response.ErrorListener {
                 Toast.makeText(this@HomepageActivity, it.toString(), Toast.LENGTH_LONG).show()
