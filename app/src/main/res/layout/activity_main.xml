@@ -7,36 +7,42 @@
     tools:context=".MainActivity"
     android:background="@drawable/basic_background">
 
-    <FrameLayout
-        android:id="@+id/flGoogleIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/green_circle_stroke_ripple_background"
+    <ImageView
+        android:id="@+id/ivWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:src="@drawable/ic_wallet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <ImageView
-            android:id="@+id/ivSignInGoogle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_google_logo"
-            android:layout_gravity="center"/>
-
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/tvSignIn"
+    <ProgressBar
+        android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in with Google"
-        android:textColor="@color/base_green"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:scaleY="5"
+        android:scaleX="5"
+        android:progressBackgroundTint="@color/light_green"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progressTint="@color/base_green"
+        android:max="1000"
+        android:indeterminate="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/flGoogleIcon"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="150dp"/>
+
+    <TextView
+        android:id="@+id/tvLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        android:textColor="@color/base_green"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pbLoading"
+        android:layout_margin="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

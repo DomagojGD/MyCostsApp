@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.mycostsapp.MainActivity
 import com.example.mycostsapp.MonthlyExpenses
 import com.example.mycostsapp.R
 import com.example.mycostsapp.databinding.ActivityHomepageBinding
@@ -18,19 +19,20 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import java.math.RoundingMode
 
-private lateinit var binding: ActivityHomepageBinding
-
-private lateinit var barChartSpent: BarChart
-private lateinit var barEntriesListSpent: ArrayList<BarEntry>
-private lateinit var barDataSetSpent: BarDataSet
-private lateinit var barDataSpent: BarData
-
-private lateinit var barChartSaved: BarChart
-private lateinit var barEntriesListSaved: ArrayList<BarEntry>
-private lateinit var barDataSetSaved: BarDataSet
-private lateinit var barDataSaved: BarData
-
 class HomepageActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityHomepageBinding
+
+    private lateinit var barChartSpent: BarChart
+    private lateinit var barEntriesListSpent: ArrayList<BarEntry>
+    private lateinit var barDataSetSpent: BarDataSet
+    private lateinit var barDataSpent: BarData
+
+    private lateinit var barChartSaved: BarChart
+    private lateinit var barEntriesListSaved: ArrayList<BarEntry>
+    private lateinit var barDataSetSaved: BarDataSet
+    private lateinit var barDataSaved: BarData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomepageBinding.inflate(layoutInflater)
@@ -42,7 +44,19 @@ class HomepageActivity : AppCompatActivity() {
             supportActionBar?.title = "Home"
         }
 
-        getValuesFromGoogleSheet()
+        if(intent.hasExtra(MainActivity.GOOGLE_SHEET_DATA_EXTRA)){
+
+            val monthlyExpensesList = intent.getSerializableExtra(MainActivity.GOOGLE_SHEET_DATA_EXTRA) as ArrayList<MonthlyExpenses>
+
+            setUpLastMonthExpenses(monthlyExpensesList)
+            setLastThreeMonthsExpenses(monthlyExpensesList)
+            setLastThreeMonthsSavings(monthlyExpensesList)
+
+            binding.llPleaseWaitProgressBarHomepage.visibility = View.GONE
+
+        }else{
+            getValuesFromGoogleSheet()
+        }
 
         binding.btnAddNewExpense.isClickable =
             binding.llPleaseWaitProgressBarHomepage.visibility != View.VISIBLE
@@ -274,6 +288,5 @@ class HomepageActivity : AppCompatActivity() {
 
     //TODO nauči kako se stavlja splash screen i onda će bar chart biti odmah prikazan
     //TODO dodaj opis funkcija i varijabli
-    //TODO Pogledaj šta se događa kad nema interneta i odluči što ćeš tada napraviti. Napravi offline activity.
-    //TODO kad uđeš u AddNewCostActivity, homepage se ne reloada. Popravi.
+    //TODO Dodati opciju za promjenu plaće?
 }

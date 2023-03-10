@@ -15,17 +15,18 @@ import com.example.mycostsapp.databinding.ActivityAddNewCostBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-private lateinit var binding: ActivityAddNewCostBinding
-
-//Set calendar variable
-private var calendar = Calendar.getInstance()
-//Set date listener variable
-private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
-
-//a number to know which category was selected
-private var costCategoryNumber = 0
-
 class AddNewCostActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAddNewCostBinding
+
+    //Set calendar variable
+    private var calendar = Calendar.getInstance()
+    //Set date listener variable
+    private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+
+    //a number to know which category was selected
+    private var costCategoryNumber = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNewCostBinding.inflate(layoutInflater)
@@ -182,7 +183,7 @@ class AddNewCostActivity : AppCompatActivity() {
         binding.btnGroceries.setBackgroundResource(R.drawable.btn_white_background)
         binding.btnCar.setBackgroundResource(R.drawable.btn_white_background)
         binding.btnBills.setBackgroundResource(R.drawable.btn_white_background)
-        binding.btnGroceries.setBackgroundResource(R.drawable.btn_white_background)
+        binding.btnOther.setBackgroundResource(R.drawable.btn_white_background)
 
         binding.btnGroceries.setTextColor(ContextCompat.getColor(this, R.color.base_green))
         binding.btnCar.setTextColor(ContextCompat.getColor(this, R.color.base_green))
