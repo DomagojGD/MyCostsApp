@@ -150,7 +150,7 @@ class AddNewCostActivity : AppCompatActivity() {
         }else{
 
             //URL of google sheets app script that we are sending the data to
-            val url = "https://script.google.com/macros/s/AKfycbwc0WvIcs_wzm53NKVZWH5Zys2-JwA6JOdZB7FlFm-J5I2UcugJcUi_UY9XY3lBbCXANA/exec"
+            val url = "https://script.google.com/macros/s/AKfycbxIvypoFYX55_x46aL3Sm0RM4PP4rL_ilDTY8sGNgnX5yqUggDDrBjDgqbCsYATyaX42Q/exec"
 
             //Create new string request that will say if the posting in google sheets has been a success
             val stringRequest = object: StringRequest(Method.POST, url,
@@ -179,6 +179,7 @@ class AddNewCostActivity : AppCompatActivity() {
                     val costAmountWithComa = costAmountText.replace(".", ",")
 
                     //Put corresponding parameters to the map of strings to be sent to the google sheets app script
+                    //parameter names have to be the same as in google sheet app script
                     params["category"] = costCategoryNumber.toString()
                     params["date"] = binding.etEnterCostDate.text.toString()
                     params["description"] = binding.etEnterCostDescription.text.toString()
