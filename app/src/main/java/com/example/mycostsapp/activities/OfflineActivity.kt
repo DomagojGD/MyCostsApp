@@ -14,6 +14,7 @@ class OfflineActivity : AppCompatActivity() {
 
         binding.tvOffline.text = "Please check your internet connection!"
 
+        //If internet connection is restored, homepage activity will be shown.
         binding.btnTryAgain.setOnClickListener {
             finish()
             val intent = Intent(this, HomepageActivity::class.java)

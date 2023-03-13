@@ -148,37 +148,53 @@ class AddNewCostActivity : AppCompatActivity() {
             //All data has to be entered
             Toast.makeText(this@AddNewCostActivity, "Please enter all data!", Toast.LENGTH_LONG).show()
         }else{
+
+            //URL of google sheets app script that we are sending the data to
             val url = "https://script.google.com/macros/s/AKfycbwc0WvIcs_wzm53NKVZWH5Zys2-JwA6JOdZB7FlFm-J5I2UcugJcUi_UY9XY3lBbCXANA/exec"
+
+            //Create new string request that will say if the posting in google sheets has been a success
             val stringRequest = object: StringRequest(Method.POST, url,
                 Response.Listener {
+
+                    /** Toast to be shown that says that data has been sent successfully
+                    *"it" is set in google app script- line 138:
+                    *return ContentService.createTextOutput("New cost successfully added!").setMimeType(ContentService.MimeType.TEXT); */
                     Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
+
+                    //Remove "please wait" progress bar
                     binding.llPleaseWaitProgressBarAddNewCost.visibility = View.GONE
+                    //Clear UI
                     clearNewCostsValues()
                 },
                 Response.ErrorListener {
+                    //Show the error
                     Toast.makeText(this@AddNewCostActivity, it.toString(), Toast.LENGTH_LONG).show()
                 }){
                 override fun getParams(): MutableMap<String, String> {
+                    //Map of strings to be sent to google sheets app script
                     val params = HashMap<String, String>()
 
+                    //Replace '.' with ',' because decimal numbers are written with ',' in google sheets
                     val costAmountText = binding.etEnterCostAmount.text.toString()
                     val costAmountWithComa = costAmountText.replace(".", ",")
 
+                    //Put corresponding parameters to the map of strings to be sent to the google sheets app script
                     params["category"] = costCategoryNumber.toString()
                     params["date"] = binding.etEnterCostDate.text.toString()
                     params["description"] = binding.etEnterCostDescription.text.toString()
-                    //params["amount"] = binding.etEnterCostAmount.text.toString()
                     params["amount"] = costAmountWithComa
 
                     return params
                 }
             }
 
+            //Create new request queue to send data to google sheets app script
             val queue = Volley.newRequestQueue(this@AddNewCostActivity)
             queue.add(stringRequest)
         }
     }
 
+    //Clear UI so it looks the same as when the activity is just started. This is to happen after data has been sent.
     private fun clearNewCostsValues(){
         binding.btnGroceries.setBackgroundResource(R.drawable.btn_white_background)
         binding.btnCar.setBackgroundResource(R.drawable.btn_white_background)
@@ -195,6 +211,7 @@ class AddNewCostActivity : AppCompatActivity() {
         binding.etEnterCostAmount.text!!.clear()
     }
 
+    // Finish current activity and start homepage activity so it can be refreshed and the data can be shown correctly
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
@@ -202,5 +219,3 @@ class AddNewCostActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-
-//TODO dodaj opis i ovdje i u app scriptu
