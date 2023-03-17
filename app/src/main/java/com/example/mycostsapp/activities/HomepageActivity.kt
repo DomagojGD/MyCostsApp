@@ -189,7 +189,7 @@ class HomepageActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
 
         //URL of google sheets app script that we are getting the data from
-        val url = "https://script.google.com/macros/s/AKfycbxIvypoFYX55_x46aL3Sm0RM4PP4rL_ilDTY8sGNgnX5yqUggDDrBjDgqbCsYATyaX42Q/exec"
+        val url = "https://script.google.com/macros/s/AKfycbypNe1_cc23sPYuIVp3DSkEVbgh6nEMU68K1pHFFKPGxyXPrIcHAHKPj00N3sVtN5EXCg/exec"
 
         //JSON object request to get JSON from google sheets app script
         val jsonObjectRequest = object: JsonObjectRequest(

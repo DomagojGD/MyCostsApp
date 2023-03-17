@@ -150,7 +150,7 @@ class AddNewCostActivity : AppCompatActivity() {
         }else{
 
             //URL of google sheets app script that we are sending the data to
-            val url = "https://script.google.com/macros/s/AKfycbxIvypoFYX55_x46aL3Sm0RM4PP4rL_ilDTY8sGNgnX5yqUggDDrBjDgqbCsYATyaX42Q/exec"
+            val url = "https://script.google.com/macros/s/AKfycbypNe1_cc23sPYuIVp3DSkEVbgh6nEMU68K1pHFFKPGxyXPrIcHAHKPj00N3sVtN5EXCg/exec"
 
             //Create new string request that will say if the posting in google sheets has been a success
             val stringRequest = object: StringRequest(Method.POST, url,
